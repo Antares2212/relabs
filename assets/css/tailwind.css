@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+@layer components {
+  .bg-login-color {
+    @apply bg-[#2D3A4B];
+    @apply text-[#fff];
+  }
+}
