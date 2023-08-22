@@ -1,41 +1,17 @@
-import { dateTime } from '@/utils/getDate'
 <template>
   <div class="tables flex justify-between">
     <div class="flex flex-col w-auto">
-      <TableUser :users="users" :handleDelete="handleDelete" />
+      <TableUser :loading="loading" :users="users" :handleDelete="handleDelete" />
       <PaggenationLine :updatePage="updatePage"/>
     </div>
-    <el-table :data="events" style="width: 700px">
-      <el-table-column prop="date" label="Дата" width="auto" />
-      <el-table-column prop="event" label="Действие" width="auto" />
-    </el-table>
+    <EventsTable />
   </div>
 </template>
 
 <script setup>
-  const users = ref([])
-  const params = ref({
-    limit: 5,
-    page: 1
-  })
-  const events = reactive([])
-  
-  const updatePage = (val) => {
-    params.value.page = val
-    getUsers()
-  }
+  import { useUsers } from '@/hooks/useUsers'
 
-  const getUsers = async () => {
-    users.value = await $fetch('https://fakestoreapi.com/carts?' + `limit=${params.value.limit}&page=${params.value.page}`)
-  }
-
-  const handleDelete = (userRow) => {
-    const { fullTime } = dateTime()
-    users.value = users.value.filter(user => user.id != userRow.id)
-    events.push({date: fullTime, event: `Удален пользователь с id: ${userRow.id}`})
-  }
-
-  onMounted(getUsers)
+  const { loading, handleDelete, users, updatePage } = useUsers()
 </script>
 
 <style scoped>

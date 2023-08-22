@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="users" style="width: 700px">
+  <el-table v-loading="loading" :data="users" style="width: 700px">
     <el-table-column prop="id" label="ID" width="80" />
     <el-table-column prop="userId" label="Имя" width="120" />
     <el-table-column prop="date" label="Дата" width="auto" />
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-  const { users, handleDelete } = defineProps(['users', 'handleDelete'])
+  defineProps(['users', 'handleDelete', 'loading'])
 </script>
 
 <style scoped>

@@ -4,18 +4,19 @@ import { NuxtLink } from '../.nuxt/components';
     <el-container>
       <el-header>
         <el-menu 
+          @select="handleSelect"
           :default-active="$route.path"
           mode="horizontal"
           class="el-menu-horizontal-demo"
         >
           <el-menu-item index="/">
-            <NuxtLink to="/">Home</NuxtLink>
+            Home
           </el-menu-item>
           <el-menu-item index="/shop">
-            <NuxtLink to="/shop">Shop</NuxtLink>
+            Shop
           </el-menu-item>
           <el-menu-item index="/login">
-            <NuxtLink to="/login">Login</NuxtLink>
+            Login
           </el-menu-item>
         </el-menu>
       </el-header>
@@ -30,7 +31,10 @@ import { NuxtLink } from '../.nuxt/components';
 </template>
 
 <script setup>
-
+  const router = useRouter()
+  const handleSelect = (key, keyPath) => {
+    router.push(key)
+  }
 </script>
 
 <style scoped>
