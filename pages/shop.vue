@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <div class="grid grid-cols-4 gap-5 mt-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 mx-auto">
       <div v-for="product in products" :key="product.id">
         <ProductCard :product="product" />
       </div>

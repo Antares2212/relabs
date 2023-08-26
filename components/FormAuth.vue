@@ -9,10 +9,10 @@
     style="width: 460px;"
   >
     <el-form-item label="Email:" prop="email">
-      <el-input v-model="ruleForm.email" type="email" autocomplete="off"/>
+      <el-input v-model="ruleForm.email" type="email" :disabled="isLoading" autocomplete="off"/>
     </el-form-item>
     <el-form-item label="Password:" prop="pass">
-      <el-input v-model="ruleForm.pass" type="password" autocomplete="off"/>
+      <el-input v-model.trim="ruleForm.pass" type="password" :disabled="isLoading"  autocomplete="off"/>
     </el-form-item>
     <el-form-item>
       <el-button v-if="!isLoading" class="mx-auto my-3" type="primary" @click="submitForm(ruleFormRef)">
@@ -41,7 +41,7 @@
     
     if (!formEl || !data) return
     formEl.validate((valid) => {
-      if (valid && data) {
+      if (valid) {
         isLoading.value = true
         setTimeout(async () => {
           isLoading.value = false

@@ -2,21 +2,19 @@
   <div class="mx-auto mt-4">
     <el-pagination
       v-model:current-page="currentPage"
-      :page-size="10"
+      :page-size="pageSize"
       layout="prev, pager, next"
-      :total="100"
+      :total="totalUsers"
       @current-change="handleCurrentChange"
     />
   </div>
 </template>
 
 <script setup>
-  const { updatePage } = defineProps(['updatePage'])
+  const { updatePage, totalUsers, pageSize } = defineProps(['updatePage', 'totalUsers', 'pageSize'])
   const currentPage = ref(1)
 
-  const handleCurrentChange = (val) => {
-    updatePage(val)
-  }
+  const handleCurrentChange = (val) => updatePage(val)
 </script>
 
 <style scoped>

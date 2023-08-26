@@ -1,7 +1,7 @@
 export const validators = {
   email: [
     { required: true, messege: 'Please input the email', trigger: 'blur' },
-    { type: 'email', message: 'Please enter a valid email address', trigger: ['blur', 'change'] }
+    { type: 'email', message: 'Please enter a valid email address', trigger: 'blur' }
   ],
   pass: [
     { required: true, messege: 'Please input the password', trigger: 'blur' },

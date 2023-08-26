@@ -1,8 +1,8 @@
 <template>
   <div class="tables flex justify-between">
     <div class="flex flex-col w-auto">
-      <TableUser :loading="loading" :users="users" :handleDelete="handleDelete" />
-      <PaggenationLine :updatePage="updatePage"/>
+      <TableUser :loading="loading" :users="users.items" :handleDelete="handleDelete" />
+      <PaggenationLine :updatePage="updatePage" :totalUsers="users.total" :pageSize="users.limit"/>
     </div>
     <EventsTable />
   </div>
