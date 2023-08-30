@@ -34,7 +34,7 @@
   const isLoading = ref(false)
 
   const submitForm = async (formEl) => {
-    const { data } = await useFetch('/api/auth', {
+    const { data } = await $fetch('/api/auth', {
       method: 'post',
       body: ruleForm
     })

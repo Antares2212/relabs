@@ -1,4 +1,4 @@
-import { useWebSocket } from '@/utils/useWebSocket'
+<!-- import { useWebSocket } from '@/utils/useWebSocket' -->
 import { dateTime } from '@/utils/getDate'
 <template>
   <el-table :data="events" style="width: 700px">
@@ -9,11 +9,13 @@ import { dateTime } from '@/utils/getDate'
 
 <script setup>
   const { getDataByTimestamp } = dateTime()
-  const events = reactive([])
-
+  const events = reactive([])  
+  const data = ref([])
+  
   onMounted(() => {
-    const { data } = useWebSocket('wss://test.relabs.ru/event')
-    
+    const { getData, openSocket } = useWebSocket()
+    openSocket()
+    getData(data)
     watch(() => {
       return data.value.slice()
     }, (newVal, oldVal) => {
@@ -21,6 +23,12 @@ import { dateTime } from '@/utils/getDate'
       events.push({ ctime: getDataByTimestamp(diff[0].ctime), event: diff[0].event })
     })
   })
+
+  onBeforeUnmount(() => {
+    const { closeSocket } = useWebSocket()
+    closeSocket()
+  })
+  
 </script>
 
 <style scoped>

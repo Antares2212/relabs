@@ -1,24 +1,26 @@
-import { ref } from 'vue'
+export const useWebSocket = () => {
+  const websocket = new WebSocket('wss://test.relabs.ru/event')
 
-export const useWebSocket = (url) => {
-  const data = ref([])
-  const websocket = new WebSocket(url)
-  
-  websocket.onmessage = (event) => {
-    data.value.push(JSON.parse(event.data))
+  const openSocket = () => {
+    websocket.onopen = () => {
+      console.log('Сокет открыт');
+    }
   }
   
-  function send(message) {
-    websocket.send(message)
+  const getData = (data) => {
+    websocket.onmessage = (event) => {
+      data.value.push(JSON.parse(event.data))
+    } 
   }
 
-  function close() {
+  const closeSocket = () => {
     websocket.close()
+    console.log('Сокет Закрыт');
   }
   
   return {
-    data,
-    send,
-    close
+    openSocket,
+    getData,
+    closeSocket
   }
 }
